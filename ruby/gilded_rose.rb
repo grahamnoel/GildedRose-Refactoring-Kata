@@ -32,7 +32,11 @@ class GildedRose
 
   def update_standard(item)
     item.quality -= 1 if item.quality > 0
-    item.quality -= 1 if item.sell_in < 0
+    
+    if item.sell_in < 0
+      item.quality -= 1 if item.quality > 0
+    end
+
     item.sell_in -= 1
   end
 
@@ -45,8 +49,8 @@ class GildedRose
         return update_sulfuras(item)
       when "Backstage passes to a TAFKAL80ETC concert"
         return update_backstage(item)
-      # else
-      #   return update_standard(item)
+      else
+        return update_standard(item)
       end
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > 0
