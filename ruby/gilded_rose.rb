@@ -5,8 +5,8 @@ class GildedRose
   end
 
   def update_brie(item)
-    item.sell_in -= 1
     item.quality += 1 if item.quality < 50
+    item.sell_in -= 1
   end
 
   def update_sulfuras(item)
