@@ -52,6 +52,32 @@ describe GildedRose do
         expect(items[0].quality).to eq 0
       end
     end
+
+    context 'brie' do
+      let(:name) { "Aged Brie" }
+
+      it "decrements sell_in by 1" do
+        items = [item]
+        GildedRose.new(items).update_quality()
+        expect(items[0].sell_in).to eq 9
+      end
+
+      it "increments quality by 1" do
+        items = [item]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 10
+      end
+
+      context "and quantity at 50" do
+        let(:quality) { 50 }
+
+        it "does not go above 50" do
+          items = [item]
+          GildedRose.new(items).update_quality()
+          expect(items[0].quality).to eq 50
+        end
+      end
+    end
   end
 
 end
