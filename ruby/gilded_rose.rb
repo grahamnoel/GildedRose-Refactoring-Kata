@@ -1,29 +1,3 @@
-class GildedRose
-
-  def initialize(items)
-    @items = items
-  end
-
-  def klass_for(name)
-    case name
-    when "Aged Brie"
-      Brie
-    when "Sulfuras, Hand of Ragnaros"
-      Sulfuras
-    when "Backstage passes to a TAFKAL80ETC concert"
-      Backstage
-    else
-      Standard
-    end
-  end
-
-  def update_quality()
-    @items.each do |item|
-      klass_for(item.name).new(item).update
-    end
-  end
-end
-
 class BaseItem
   attr_reader :item
 
@@ -74,6 +48,29 @@ class Standard < BaseItem
     end
 
     item.sell_in -= 1
+  end
+end
+class GildedRose
+
+  DEFAULT_ITEM = Standard
+  SPECIAL_ITEMS = {
+    "Aged Brie" => Brie,
+    "Sulfuras, Hand of Ragnaros" => Sulfuras,
+    "Backstage passes to a TAFKAL80ETC concert" => Backstage
+  }
+
+  def initialize(items)
+    @items = items
+  end
+
+  def klass_for(name)
+    SPECIAL_ITEMS[name] || DEFAULT_ITEM
+  end
+
+  def update_quality()
+    @items.each do |item|
+      klass_for(item.name).new(item).update
+    end
   end
 end
 
