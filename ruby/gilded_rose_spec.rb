@@ -26,6 +26,22 @@ describe GildedRose do
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 8
     end
+
+    context "past sell by day" do
+      let(:sell_in) { -1 }
+
+      it "decrements sell_in by 1" do
+        items = [item]
+        GildedRose.new(items).update_quality()
+        expect(items[0].sell_in).to eq -2
+      end
+
+      it "decrements quality by 2" do
+        items = [item]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 7
+      end
+    end
   end
 
 end
