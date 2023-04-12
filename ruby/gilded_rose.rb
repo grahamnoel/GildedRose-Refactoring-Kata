@@ -39,6 +39,16 @@ class Backstage < BaseItem
   end
 end
 
+class Conjured < BaseItem
+  def update
+    2.times do
+      item.quality -= 1 if item.quality > 0
+    end
+
+    item.sell_in -= 1
+  end
+end
+
 class Standard < BaseItem
   def update
     item.quality -= 1 if item.quality > 0
@@ -56,7 +66,8 @@ class GildedRose
   SPECIAL_ITEMS = {
     "Aged Brie" => Brie,
     "Sulfuras, Hand of Ragnaros" => Sulfuras,
-    "Backstage passes to a TAFKAL80ETC concert" => Backstage
+    "Backstage passes to a TAFKAL80ETC concert" => Backstage,
+    "Conjured Mana Cake" => Conjured
   }
 
   def initialize(items)
