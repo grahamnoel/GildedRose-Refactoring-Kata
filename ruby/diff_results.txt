@@ -1,0 +1,5 @@
+=> diff initial_results.txt refactor_results.txt
+24c24
+< Conjured Mana Cake, 2, 5
+---
+> Conjured Mana Cake, 2, 4
