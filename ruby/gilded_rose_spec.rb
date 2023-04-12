@@ -42,6 +42,16 @@ describe GildedRose do
         expect(items[0].quality).to eq 7
       end
     end
+
+    context "quality at zero" do
+      let(:quality) { 0 }
+
+      it "does not go lower than zero" do
+        items = [item]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 0
+      end
+    end
   end
 
 end
