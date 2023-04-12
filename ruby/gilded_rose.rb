@@ -63,13 +63,10 @@ class GildedRose
     @items = items
   end
 
-  def klass_for(name)
-    SPECIAL_ITEMS[name] || DEFAULT_ITEM
-  end
-
   def update_quality()
     @items.each do |item|
-      klass_for(item.name).new(item).update
+      wrapped_item = (SPECIAL_ITEMS[item.name] || DEFAULT_ITEM).new(item)
+      wrapped_item.update
     end
   end
 end
