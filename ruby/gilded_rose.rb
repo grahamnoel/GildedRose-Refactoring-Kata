@@ -45,8 +45,8 @@ class GildedRose
         return update_sulfuras(item)
       when "Backstage passes to a TAFKAL80ETC concert"
         return update_backstage(item)
-      else
-        return update_standard(item)
+      # else
+      #   return update_standard(item)
       end
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > 0
