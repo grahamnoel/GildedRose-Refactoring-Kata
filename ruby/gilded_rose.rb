@@ -13,12 +13,13 @@ class GildedRose
   end
 
   def update_backstage(item)
-    item.sell_in -= 1
     item.quality += 1 if item.quality < 50
 
     if item.sell_in < 11
       item.quality += 1 if item.quality < 50
     end
+
+    item.sell_in -= 1
   end
 
   def update_quality()
