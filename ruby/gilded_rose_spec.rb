@@ -104,5 +104,103 @@ describe GildedRose do
         end
       end
     end
+
+    context "backstage passes" do
+      let(:name) { "Backstage passes to a TAFKAL80ETC concert" }
+
+      context "when sell by is greater than 10" do
+        let(:sell_in) { 11 }
+
+        it "decrements sell_in by 1" do
+          items = [item]
+          GildedRose.new(items).update_quality
+          expect(items[0].sell_in).to eq 10
+        end
+
+        it "increments quality by 1" do
+          items = [item]
+          GildedRose.new(items).update_quality
+          expect(items[0].quality).to eq 10
+        end
+
+        context "and quality above 50" do
+          let(:quality) { 50 }
+
+          it "does not go above 50" do
+            items = [item]
+            GildedRose.new(items).update_quality
+            expect(items[0].quality).to eq 50
+          end
+        end
+      end
+
+      context "when sell by is in 10 days" do
+        let(:sell_in) { 10 }
+
+        it "decrements sell_in by 1" do
+          items = [item]
+          GildedRose.new(items).update_quality
+          expect(items[0].sell_in).to eq 9
+        end
+
+        it "increments quality by 2" do
+          items = [item]
+          GildedRose.new(items).update_quality
+          expect(items[0].quality).to eq 11
+        end
+
+        context "and quality above 50" do
+          let(:quality) { 50 }
+
+          it "does not go above 50" do
+            items = [item]
+            GildedRose.new(items).update_quality
+            expect(items[0].quality).to eq 50
+          end
+        end
+      end
+
+      context "when sell by is in 5 days" do
+        let(:sell_in) { 5 }
+
+        it "decrements sell_in by 1" do
+          items = [item]
+          GildedRose.new(items).update_quality
+          expect(items[0].sell_in).to eq 4
+        end
+
+        it "increments quality by 2" do
+          items = [item]
+          GildedRose.new(items).update_quality
+          expect(items[0].quality).to eq 12
+        end
+
+        context "and quality above 50" do
+          let(:quality) { 50 }
+
+          it "does not go above 50" do
+            items = [item]
+            GildedRose.new(items).update_quality
+            expect(items[0].quality).to eq 50
+          end
+        end
+      end
+
+      context "when the concert has passed" do
+        let(:sell_in) { -1 }
+
+        it "decrements sell_in by 1" do
+          items = [item]
+          GildedRose.new(items).update_quality
+          expect(items[0].sell_in).to eq -2
+        end
+
+        it "quality drops to zero" do
+          items = [item]
+          GildedRose.new(items).update_quality
+          expect(items[0].quality).to eq 0
+        end
+      end
+    end
   end
 end
