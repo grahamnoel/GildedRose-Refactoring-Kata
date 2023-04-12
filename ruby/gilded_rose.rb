@@ -4,10 +4,13 @@ class GildedRose
     @items = items
   end
 
+  def update_brie(item)
+  end
+
   def update_quality()
     @items.each do |item|
       if item.name == "Aged Brie"
-        return
+        return update_brie(item)
       end
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > 0
