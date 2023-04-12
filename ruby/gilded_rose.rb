@@ -6,6 +6,7 @@ class GildedRose
 
   def update_brie(item)
     item.sell_in -= 1
+    item.quality += 1
   end
 
   def update_quality()
