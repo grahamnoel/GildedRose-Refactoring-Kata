@@ -4,33 +4,17 @@ class GildedRose
     @items = items
   end
 
-  def update_brie(item)
-    Brie.new(item).update
-  end
-
-  def update_sulfuras(item)
-    Sulfuras.new(item).update
-  end
-
-  def update_backstage(item)
-    Backstage.new(item).update
-  end
-
-  def update_standard(item)
-    Standard.new(item).update
-  end
-
   def update_quality()
     @items.each do |item|
       case item.name
       when "Aged Brie"
-        return update_brie(item)
+        Brie.new(item).update
       when "Sulfuras, Hand of Ragnaros"
-        return update_sulfuras(item)
+        Sulfuras.new(item).update
       when "Backstage passes to a TAFKAL80ETC concert"
-        return update_backstage(item)
+        Backstage.new(item).update
       else
-        return update_standard(item)
+        Standard.new(item).update
       end
     end
   end
