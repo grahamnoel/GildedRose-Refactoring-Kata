@@ -24,37 +24,28 @@ class GildedRose
   end
 end
 
-class Brie
+class BaseItem
   attr_reader :item
 
   def initialize(item)
     @item = item
   end
 
+  def update
+  end
+end
+
+class Brie < BaseItem
   def update
     item.quality += 1 if item.quality < 50
     item.sell_in -= 1
   end
 end
 
-class Sulfuras
-  attr_reader :item
-
-  def initialize(item)
-    @item = item
-  end
-
-  def update
-  end
+class Sulfuras < BaseItem
 end
 
-class Backstage
-  attr_reader :item
-
-  def initialize(item)
-    @item = item
-  end
-
+class Backstage < BaseItem
   def update
     item.quality += 1 if item.quality < 50
 
@@ -74,13 +65,7 @@ class Backstage
   end
 end
 
-class Standard
-  attr_reader :item
-
-  def initialize(item)
-    @item = item
-  end
-
+class Standard < BaseItem
   def update
     item.quality -= 1 if item.quality > 0
     
