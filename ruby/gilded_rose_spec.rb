@@ -68,13 +68,39 @@ describe GildedRose do
         expect(items[0].quality).to eq 10
       end
 
-      context "and quantity at 50" do
+      context "and quality at 50" do
         let(:quality) { 50 }
 
         it "does not go above 50" do
           items = [item]
           GildedRose.new(items).update_quality
           expect(items[0].quality).to eq 50
+        end
+      end
+    end
+
+    context "sulfuras" do
+      let(:name) { "Sulfuras, Hand of Ragnaros" }
+
+      it "never has to be sold" do
+        items = [item]
+        GildedRose.new(items).update_quality
+        expect(items[0].sell_in).to eq 10
+      end
+
+      it "never decreases in quality" do
+        items = [item]
+        GildedRose.new(items).update_quality
+        expect(items[0].quality).to eq 9
+      end
+
+      context "and quality above 50" do
+        let(:quality) { 55 }
+
+        it "does not change the quality" do
+          items = [item]
+          GildedRose.new(items).update_quality
+          expect(items[0].quality).to eq 55
         end
       end
     end
