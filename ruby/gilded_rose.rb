@@ -12,6 +12,10 @@ class GildedRose
   def update_sulfuras(item)
   end
 
+  def update_backstage(item)
+    item.sell_in -= 1
+  end
+
   def update_quality()
     @items.each do |item|
       case item.name
@@ -19,6 +23,8 @@ class GildedRose
         return update_brie(item)
       when "Sulfuras, Hand of Ragnaros"
         return update_sulfuras(item)
+      when "Backstage passes to a TAFKAL80ETC concert"
+        return update_backstage(item)
       end
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > 0
